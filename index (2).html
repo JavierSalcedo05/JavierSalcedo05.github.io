@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños, BFF!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #ffecd2);
+            overflow: hidden;
+        }
+        #touchButton {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #touchButton:hover {
+            background-color: #ff4757;
+        }
+        #celebration {
+            display: none;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #ff4757;
+            margin-bottom: 20px;
+        }
+        #message {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .balloon {
+            position: absolute;
+            width: 30px;
+            height: 40px;
+            background-color: #ff6b6b;
+            border-radius: 50%;
+            animation: float 5s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <button id="touchButton">Tócame</button>
+    <div id="celebration">
+        <h1>Feliz cumpleaños, Bffa! 🎉</h1>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        const button = document.getElementById('touchButton');
+        const celebration = document.getElementById('celebration');
+        const message = document.getElementById('message');
+
+        const fullMessage = `Hoy celebramos a la persona increíble que eres. No solo eres mi mejor amiga, sino también mi confidente y mi luz en los días oscuros. Cada recuerdo que hemos compartido, cada risa y cada lágrima, me han hecho valorar aún más nuestra amistad.`;
+
+        button.addEventListener('click', () => {
+            button.style.display = 'none';
+            celebration.style.display = 'block';
+            typeMessage();
+            createBalloons();
+        });
+
+        function typeMessage() {
+            let i = 0;
+            const typingEffect = setInterval(() => {
+                if (i < fullMessage.length) {
+                    message.innerHTML += fullMessage.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typingEffect);
+                }
+            }, 50);
+        }
+
+        function createBalloons() {
+            for (let i = 0; i < 20; i++) {
+                const balloon = document.createElement('div');
+                balloon.classList.add('balloon');
+                balloon.style.left = `${Math.random() * 100}%`;
+                balloon.style.top = `${Math.random() * 100}%`;
+                balloon.style.backgroundColor = getRandomColor();
+                balloon.style.animationDelay = `${Math.random() * 5}s`;
+                document.body.appendChild(balloon);
+            }
+        }
+
+        function getRandomColor() {
+            const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+    </script>
+</body>
+</html>
